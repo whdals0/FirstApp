@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="140dp"
+        android:orientation="vertical">
+        
+        <ImageView
+            android:id="@+id/main_iv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@mipmap/ic_launcher"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/login_border"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:gravity="center_vertical"
+                android:background="#fff"
+                android:src="@drawable/ic_login1" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:maxLines="1"
+                android:background="#FFFFFF"
+                android:textSize="12dp"
+                android:hint="아이디(e-mail)"
+                android:layout_marginLeft="10dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/login_border"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:gravity="center_vertical"
+                android:background="#fff"
+                android:src="@drawable/ic_login2" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:maxLines="1"
+                android:background="#FFFFFF"
+                android:textSize="12dp"
+                android:hint="비밀번호"
+                android:layout_marginLeft="10dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="right">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:text="아이디 찾기"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:text=" | "/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:text="비밀번호 찾기"
+                android:layout_marginRight="15dp"/>
+
+        </LinearLayout>
+        
+        <Button
+            android:id="@+id/signin_btn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Sign In"
+            android:textColor="#fafafa"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/loginbtn_background"
+            android:backgroundTint="#424242" />
+
+        <Button
+            android:id="@+id/signup_btn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textColor="#FFFFFF"
+            android:text="Sign Up"
+            android:background="@drawable/loginbtn_background"
+            android:backgroundTint="#9e9e9e"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"/>
+    </LinearLayout>
+
+</LinearLayout>
