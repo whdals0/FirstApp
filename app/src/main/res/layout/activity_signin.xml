@@ -37,6 +37,7 @@
                 android:src="@drawable/ic_login1" />
 
             <EditText
+                android:id="@+id/email_et"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:maxLines="1"
@@ -66,10 +67,12 @@
                 android:src="@drawable/ic_login2" />
 
             <EditText
+                android:id="@+id/pw_et"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:maxLines="1"
                 android:background="#FFFFFF"
+                android:inputType="textPassword"
                 android:textSize="12dp"
                 android:hint="비밀번호"
                 android:layout_marginLeft="10dp" />

@@ -2,6 +2,7 @@ package com.roopre.firstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,8 +31,13 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(CheckValid()){
-                    //정상적으로 값이 입력되어 있음인
+                    //정상적으로 값이 입력되어 있음
                     Log.d("SignupActivity", "Success");
+                    Intent intent = new Intent();
+                    intent.putExtra("email", email_et.getText().toString());
+                    intent.putExtra("pw", pw_et.getText().toString());
+                    setResult(RESULT_OK, intent);
+                    finish();
 
                 }else{
                     //값이 입력 안되어 있음
