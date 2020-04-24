@@ -42,7 +42,7 @@ public class ListViewActivity extends AppCompatActivity {
         data.add(new Weather("여수", "20도", "눈"));
 
         // Adapter 초기화
-        WeatherAdapter mAdapter = new WeatherAdapter(data);
+        mAdapter = new WeatherAdapter(data);
 
         // RecyclerView 의 레이아웃 방향을 잡아주는 LinearLayoutManager 셋팅
         rv.setLayoutManager(new LinearLayoutManager(this)) ;

@@ -1,12 +1,14 @@
 package com.roopre.firstapp;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -48,15 +50,21 @@ public class WeatherAdapter extends RecyclerView.Adapter {
     }
 
 
-    // ViewHolder 에 데이터 연결하
+    // ViewHolder 에 데이터 연결하기
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
         CustomViewHolder viewHolder = (CustomViewHolder) holder;
 
         viewHolder.imageview.setImageResource(mWeatherImageMap.get(dataList.get(position).getWeather()));
         viewHolder.city_tv.setText(dataList.get(position).getCity());
         viewHolder.temp_tv.setText(dataList.get(position).getTemp());
+        viewHolder.city_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("WeatherAdapter", "clicked "+dataList.get(position).getCity());
+            }
+        });
     }
 
     @Override
