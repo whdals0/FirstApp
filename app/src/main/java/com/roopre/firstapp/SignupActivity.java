@@ -106,6 +106,19 @@ public class SignupActivity extends AppCompatActivity {
             super.onPostExecute(s);
 
             Log.d(TAG, "result = "+s);
+            if(s.contains("failed") || s.contains("error")){
+                Toast.makeText(SignupActivity.this, "잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+            }else
+            {
+                //[{"result":"insert success"}]
+                Toast.makeText(SignupActivity.this, "회원가입 되었습니다.", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent();
+                intent.putExtra("email", email_et.getText().toString());
+                intent.putExtra("pw", pw_et.getText().toString());
+                setResult(RESULT_OK, intent);
+                finish();
+            }
         }
     }
 
@@ -152,18 +165,7 @@ public class SignupActivity extends AppCompatActivity {
 //            super.onPostExecute(s);
 //
 //            Log.d(TAG, s);
-//            if(s.contains("failed") || s.contains("error")){
-//                Toast.makeText(SignupActivity.this, "잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
-//            }else
-//            {
-//                Toast.makeText(SignupActivity.this, "회원가입 되었습니다.", Toast.LENGTH_SHORT).show();
-//
-//                Intent intent = new Intent();
-//                intent.putExtra("email", email_et.getText().toString());
-//                intent.putExtra("pw", pw_et.getText().toString());
-//                setResult(RESULT_OK, intent);
-//                finish();
-//            }
+
 //
 //        }
 //    }
