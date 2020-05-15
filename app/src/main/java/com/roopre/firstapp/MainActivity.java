@@ -3,11 +3,17 @@ package com.roopre.firstapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
@@ -23,6 +29,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final String TAG = getClass().getSimpleName();
@@ -36,10 +49,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     SharedPreferences spref;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
+
+        Log.d(TAG, "LifeCycle - onCreate");
 
         // 선언한 뷰 초기화
         signin_btn = findViewById(R.id.signin_btn);
@@ -94,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
+
         Log.d(TAG, "onResume");
         Log.d(TAG, "auto spref value = "
                 +spref.getBoolean("auto", false));
@@ -114,14 +132,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.signin_btn:
-                Toast.makeText(this, "SignIn Clicked!!!!!", Toast.LENGTH_SHORT).show();
-                SharedPreferences.Editor editor = spref.edit();
 
-                editor.putString("email", email_et.getText().toString());
-                editor.putString("pw", pw_et.getText().toString());
-
-                editor.apply();
-
+                new HttpAsyncTask().execute();
+//                Toast.makeText(this, "SignIn Clicked!!!!!", Toast.LENGTH_SHORT).show();
+//                SharedPreferences.Editor editor = spref.edit();
+//
+//                editor.putString("email", email_et.getText().toString());
+//                editor.putString("pw", pw_et.getText().toString());
+//
+//                editor.apply();
 
                 break;
             case R.id.main_iv:
@@ -130,6 +149,63 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    class HttpAsyncTask extends AsyncTask<String, Void, String> {
+
+        OkHttpClient client = new OkHttpClient();
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String result = null;
+            OkHttpClient client = new OkHttpClient();
+
+            HttpUrl httpUrl = new HttpUrl.Builder()
+                    .scheme("http")
+                    .host("54.180.108.217")
+                    .addPathSegment("user_login.php")
+                    .addQueryParameter("userid", email_et.getText().toString())
+                    .addQueryParameter("passwd", pw_et.getText().toString())
+                    // Each addPathSegment separated add a / symbol to the final url
+                    // finally my Full URL is:
+                    // https://subdomain.apiweb.com/api/v1/students/8873?auth_token=71x23768234hgjwqguygqew
+                    .build();
+
+            System.out.println(httpUrl.toString());
+
+            try {
+                Request requesthttp = new Request.Builder()
+                        .addHeader("accept", "application/json")
+                        .url(httpUrl) // <- Finally put httpUrl in here
+                        .build();
+
+                Response response = null;
+                response = client.newCall(requesthttp).execute();
+                result = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            Log.d(TAG, s);
+            if(s.contains("no user") || s.contains("error")){
+                Toast.makeText(MainActivity.this, "아이디와 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
+            }else
+            {
+                Toast.makeText(MainActivity.this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+                LoginProcess();
+            }
+
+        }
+    }
+
+    private void LoginProcess(){
+        Log.d(TAG, "Login Process");
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
