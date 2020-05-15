@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             HttpUrl httpUrl = new HttpUrl.Builder()
                     .scheme("http")
-                    .host("54.180.108.217")
+                    .host("13.209.236.238")
                     .addPathSegment("user_login.php")
                     .addQueryParameter("userid", email_et.getText().toString())
                     .addQueryParameter("passwd", pw_et.getText().toString())
